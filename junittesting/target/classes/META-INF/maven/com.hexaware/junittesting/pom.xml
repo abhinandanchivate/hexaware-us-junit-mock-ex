@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hexaware</groupId>
+  <artifactId>junittesting</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <!-- Use Java 17 for compilation -->
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+ <dependencies>
+ <dependency>
+  <groupId>org.mockito</groupId>
+  <artifactId>mockito-junit-jupiter</artifactId>
+  <version>5.11.0</version> <!-- or latest -->
+  <scope>test</scope>
+</dependency>
+
+ 
+ <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-core</artifactId>
+    <version>5.20.0</version>
+    <scope>test</scope>
+</dependency>
+  <!-- JUnit 5 (API) -->
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.11.0</version>
+    <scope>test</scope>
+  </dependency>
+
+  <!-- *** Needed for @ParameterizedTest, @CsvSource, etc. *** -->
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-params</artifactId>
+    <version>5.11.0</version>
+    <scope>test</scope>
+  </dependency>
+
+  <!-- JUnit engine -->
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.11.0</version>
+    <scope>test</scope>
+  </dependency>
+  <!-- https://mvnrepository.com/artifact/net.jqwik/jqwik -->
+<dependency>
+    <groupId>net.jqwik</groupId>
+    <artifactId>jqwik</artifactId>
+    <version>1.9.3</version>
+    <scope>test</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/net.jqwik/jqwik-engine -->
+<dependency>
+    <groupId>net.jqwik</groupId>
+    <artifactId>jqwik-engine</artifactId>
+    <version>1.9.3</version>
+</dependency>
+
+  <!-- AssertJ -->
+  <dependency>
+    <groupId>org.assertj</groupId>
+    <artifactId>assertj-core</artifactId>
+    <version>3.26.0</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+
+  <build>
+    <plugins>
+      <!-- Compile with Java 17 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>${maven.compiler.release}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Run main class via mvn exec:java -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <!-- change to your actual main class -->
+          <mainClass>com.hexaware.junittesting.RecordDemo</mainClass>
+        </configuration>
+      </plugin>
+
+      <!-- Surefire runs JUnit 5 tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+        </configuration>
+      </plugin>
+
+      <!-- OPTIONAL: Remove this unless you’ve set ~/.m2/toolchains.xml -->
+      <!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-toolchains-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <goals><goal>toolchain</goal></goals>
+          </execution>
+        </executions>
+        <configuration>
+          <toolchains>
+            <jdk>
+              <version>[17,)</version>
+              <vendor>any</vendor>
+            </jdk>
+          </toolchains>
+        </configuration>
+      </plugin>
+      -->
+    </plugins>
+  </build>
+</project>

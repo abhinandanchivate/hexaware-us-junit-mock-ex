@@ -1,0 +1,11 @@
+Mockito : it is the most widely used mocking framework in java.
+it helps us to create the test doubles (mock, stub, spies) to isolate
+the class under test and verify its behavior, without needing 
+real depedencies (like db, apis, or services).
+
+why use Mockito?
+1. avoids depedency on external systems(DB, network, services etc)
+2. makes unit test faster , repeatable  and reliable.
+3. lets you verify interactions(e.g. whether a method ws called 
+with correct arguments).
+4. help us with TDD(Test driven development).
