@@ -19,7 +19,7 @@ public class UserServiceTest {
         UserRepository mockRepo = mock(UserRepository.class);// will help u to get the fake / dummy object 
 
         // Stub behavior: when findById(1) is called, return a User("Abhi")
-        when(mockRepo.findById(1)).thenReturn(new User("Abhi"));
+        when(mockRepo.findById(1)).thenReturn(new User(1,"Abhi"));
         // when ==> then
         
 

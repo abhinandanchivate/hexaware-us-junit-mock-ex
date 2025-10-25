@@ -85,6 +85,7 @@ class UserServiceAdvancedTest {
         // given
         given(repository.findById(1)).willReturn(user(1, "Abhi"));
 
+        
         // when
         String result = service.getUserName(1);
 
@@ -114,8 +115,11 @@ class UserServiceAdvancedTest {
     void registerUser_trims_and_saves() {
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 
+        // used to capture the arguments of type user.
+        
         service.registerUser(7, "  Jane  ");
 
+        // some one should spy on User object which is holding some arguments. 
         verify(repository).save(captor.capture());
         User saved = captor.getValue();
         assertEquals(7, saved.id());
@@ -130,9 +134,15 @@ class UserServiceAdvancedTest {
         service.registerUser(1, "John");
         service.registerUser(2, "Doe");
 
+        // spy work on the method calls.
         verify(repository, times(2)).save(captor.capture());
         List<User> all = captor.getAllValues();
+        // getAllValues : list<User>
+        
         assertEquals(List.of(user(1, "John"), user(2, "Doe")), all);
+        // List.of==> user with id 1 , user with id 2  will be compared with all
+        // returning result will be consued by assertEq.
+        
     }
 
     // ------------------------------------------------------------
@@ -141,7 +151,9 @@ class UserServiceAdvancedTest {
     @ParameterizedTest(name = "blank or null name ''{0}'' should throw")
     @NullSource
     @ValueSource(strings = {"", " ", "   "})
-    void registerUser_blank_throws(String bad) {
+    void registerUser_blank_throws(String bad) { // bad will get the values from 
+    	// valueSource.
+    	
         assertThrows(IllegalArgumentException.class, () -> service.registerUser(5, bad));
         verifyNoInteractions(repository);
     }
